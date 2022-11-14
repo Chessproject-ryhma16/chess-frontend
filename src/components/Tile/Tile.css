@@ -10,7 +10,15 @@
     height: 100px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 90px;
+    background-size: 88px;
+}
+
+.tile .chess-piece:hover {
+    cursor: grab;
+}
+
+.tile .chess-piece:active {
+    cursor: grabbing;
 }
 
 .black-tile {
