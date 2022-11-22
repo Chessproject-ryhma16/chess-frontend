@@ -6,7 +6,7 @@ import Referee from "../../referee/Referee";
 const horizontalAxis = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const verticalAxis = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
-interface Piece {
+export interface Piece {
     image: string
     x: number
     y: number
@@ -31,9 +31,9 @@ export enum PieceType {
 const initialBoardState: Piece[] = [];
 
 for (let p = 0; p < 2; p++) {
-    const teamType = (p == 0) ? TeamType.OPPONENT : TeamType.OUR;
-    const type = (teamType == TeamType.OPPONENT) ? "black" : "white";
-    const y = (teamType == TeamType.OPPONENT) ? 7 : 0;
+    const teamType = (p === 0) ? TeamType.OPPONENT : TeamType.OUR;
+    const type = (teamType === TeamType.OPPONENT) ? "black" : "white";
+    const y = (teamType === TeamType.OPPONENT) ? 7 : 0;
 
     initialBoardState.push({image: `assets/images/${type}Rook.png`, x: 0, y, type: PieceType.ROOK, team: teamType })
     initialBoardState.push({image: `assets/images/${type}Rook.png`, x: 7, y, type: PieceType.ROOK, team: teamType })
@@ -120,7 +120,7 @@ function dropPiece(e: React.MouseEvent) {
         setPieces((value) => {
             const pieces = value.map((p) => {
                 if(p.x === gridX && p.y === gridY) {
-                    const validMove = referee.isValidMove(gridX, gridY, x, y, p.type, p.team);
+                    const validMove = referee.isValidMove(gridX, gridY, x, y, p.type, p.team, value);
 
                     if(validMove) {
                         p.x = x;
