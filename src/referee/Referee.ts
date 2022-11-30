@@ -94,6 +94,78 @@ export default class Reference {
                         }
                     }
                 }
+            } else if(type === PieceType.BISHOP) {
+                //MOVEMENT AND ATTACK LOGICAL
+
+                for(let i = 1; i < 8; i++){
+                    //TOP RIGHT MOVEMENT
+                    if(desiredPosition.x > initialPosition.x && desiredPosition.y > initialPosition.y) {
+                        let passedPosition: Position = {x: initialPosition.x + i, y: initialPosition.y + i}
+                        //check if the tile is the destination tile
+                        if(passedPosition.x === desiredPosition.x && passedPosition.y === desiredPosition.y) {
+                        //dealing with the destination tile
+                        if(this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
+                            return true
+                            }
+                        } else {
+                            //dealing with the passing tile
+                            if(this.tileIsOccupied(passedPosition, boardState)) {
+                                break
+                            }
+                        }
+                    }    
+
+                     //BOTTOM RIGHT MOVEMENT
+                    if(desiredPosition.x > initialPosition.x && desiredPosition.y < initialPosition.y) {
+                        let passedPosition: Position = {x: initialPosition.x + i, y: initialPosition.y - i}
+                        //check if the tile is the destination tile
+                        if(passedPosition.x === desiredPosition.x && passedPosition.y === desiredPosition.y) {
+                        //dealing with the destination tile
+                        if(this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
+                            return true
+                            }
+                        } else {
+                            //dealing with the passing tile
+                            if(this.tileIsOccupied(passedPosition, boardState)) {
+                                break
+                            }
+                        }
+                    }
+
+                    //BOTTOM LEFT MOVEMENT
+                    if(desiredPosition.x < initialPosition.x && desiredPosition.y < initialPosition.y) {
+                        let passedPosition: Position = {x: initialPosition.x - i, y: initialPosition.y - i}
+                        //check if the tile is the destination tile
+                        if(passedPosition.x === desiredPosition.x && passedPosition.y === desiredPosition.y) {
+                        //dealing with the destination tile
+                        if(this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
+                            return true
+                            }
+                        } else {
+                            //dealing with the passing tile
+                            if(this.tileIsOccupied(passedPosition, boardState)) {
+                                break
+                            }
+                        }
+                    }
+
+                    //TOP LEFT MOVEMENT
+                    if(desiredPosition.x < initialPosition.x && desiredPosition.y > initialPosition.y) {
+                        let passedPosition: Position = {x: initialPosition.x - i, y: initialPosition.y + i}
+                        //check if the tile is the destination tile
+                        if(passedPosition.x === desiredPosition.x && passedPosition.y === desiredPosition.y) {
+                        //dealing with the destination tile
+                        if(this.tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
+                            return true
+                            }
+                        } else {
+                            //dealing with the passing tile
+                            if(this.tileIsOccupied(passedPosition, boardState)) {
+                                break
+                            }
+                        }
+                    }
+                }
             }
         
         return false;
