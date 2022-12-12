@@ -92,7 +92,7 @@ export default function Mainmenu (){
             <button className='play'> New Game With Random</button>
             
             </Link>
-            <button onClick={() => setUsername("uusi")} className='play'> New Game With Friend</button>
+            <button onClick={() => navigate("/moves")} className='play'> New Game With Friend</button>
             </div>
             <div>
                 {}
