@@ -1,0 +1,54 @@
+.container{
+ display: grid;
+ 
+}
+
+.boxes{   
+    
+    display: flex;
+    flex-direction:column-reverse;
+    
+}
+
+.play{
+  width: 100%;
+  background-color: #5d3d5a;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+    
+}
+.nav{
+   
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    top: 20px;
+    width: 50%;
+    padding: 50px 0;
+    right: 250px;
+
+}
+.user{
+
+  background-color: #5d3d5a;
+  color: white;
+  padding: 14px 20px;
+  margin: 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: large;
+
+}
+
+.username{
+    list-style-type: none;
+    padding: 20px 20px;
+    margin: 20px;
+    font-size: large;
+}
