@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Users from './components/Users'
 import Sovellus from './Sovellus';
 
+
 function App() {
   return (
     <Router>
@@ -24,3 +25,5 @@ function App() {
     </Router>
   );
 }
+
+export default App
