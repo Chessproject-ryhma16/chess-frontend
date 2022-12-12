@@ -4,13 +4,3 @@
   height: 100vh;
   background-image: radial-gradient(circle, white, black)
 }
-
-#playerNo1 {
-  padding-top: 8px;
-  font-size: 18px;
-}
-
-#playerNo2 {
-  padding-bottom: 8px;
-  font-size: 18px;
-}
