@@ -1,7 +1,6 @@
 import { Piece, Position, samePosition, TeamType } from "../../Constants"
 import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from "./GeneralRules"
 
-
 export const kingMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
     for(let i = 1; i < 2; i++) {
         let multiplierX = (desiredPosition.x < initialPosition.x) ? -1 : (desiredPosition.x > initialPosition.x) ? 1 : 0
