@@ -69,6 +69,7 @@ export default function Mainmenu (){
     return(
       <div className="container">
         <div className='nav'>
+            <img className="Logo" src="assets/images/16.png"/>
             <Link to ="/user-info">
             <li className="username" >{username2}</li>
             </Link>

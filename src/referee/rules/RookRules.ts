@@ -36,5 +36,5 @@ export const rookMove = (initialPosition: Position, desiredPosition: Position, t
             }
         }
     }
-return false
+    return false
 }

@@ -1,14 +1,18 @@
-.layout{
-    display: grid;
-    
-}
 .box{
+  font-family: 'Arial Rounded MT';
+    position:absolute;
+    top: 50%;
+    left: calc(50% - 250px);
+    top: calc(50% - 115px);
     border-radius: 10px;
     background-color: rgb(182, 179, 179);
     padding: 20px;
-    width: 150%;
+    width: 500px;
+    height: 230px
 }
+
 .input {
+  font-family: 'Arial Rounded MT';
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -17,7 +21,9 @@
     box-sizing: border-box;
     border-radius: 10px;
 }
+
 .buttons {
+  font-family: 'Arial Rounded MT';
   width: 100%;
   background-color: #5d3d5a;
   color: white;

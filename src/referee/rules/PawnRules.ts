@@ -23,6 +23,5 @@ export const pawnMove = (initialPosition: Position, desiredPosition: Position, t
             return true
         }
     }
-
     return false
 }

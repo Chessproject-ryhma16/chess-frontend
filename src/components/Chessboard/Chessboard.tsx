@@ -38,8 +38,8 @@ function movePiece(e: React.MouseEvent) {
         const minY = chessboard.offsetTop - 50
         const maxX = chessboard.offsetLeft + chessboard.clientWidth - 50
         const maxY = chessboard.offsetTop + chessboard.clientHeight - 50
-        const x = e.clientX -50;
-        const y = e.clientY -50;
+        const x = e.clientX -50
+        const y = e.clientY -50
         activePiece.style.position = "absolute"
 
         if (x < minX) {
@@ -94,7 +94,7 @@ function dropPiece(e: React.MouseEvent) {
                     }
 
                     return results
-                },[] as Piece[]);
+                },[] as Piece[])
 
                 setPieces(updatedPieces)
             } else if (validMove) {
@@ -182,7 +182,7 @@ function promotionTeamType() {
      for (let i = 0; i < HORIZONTAL_AXIS.length; i++) {
         const number = j + i + 2;
         const piece = pieces.find((p) => samePosition(p.position, {x: i, y: j}))
-        let image = piece ? piece.image : undefined;
+        let image = piece ? piece.image : undefined
 
         board.push(<Tile key={`${j},${i}`} image={image} number={number} />)
         }
