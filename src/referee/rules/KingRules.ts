@@ -2,13 +2,6 @@ import { Piece, Position, samePosition, TeamType } from "../../Constants"
 import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from "./GeneralRules"
 
 export const kingMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
-
-    if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4) {
-        return true
-    } if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4) {
-        return true
-    }
-
     for(let i = 1; i < 2; i++) {
         let multiplierX = (desiredPosition.x < initialPosition.x) ? -1 : (desiredPosition.x > initialPosition.x) ? 1 : 0
         let multiplierY = (desiredPosition.y < initialPosition.y) ? -1 : (desiredPosition.y > initialPosition.y) ? 1 : 0
@@ -23,6 +16,15 @@ export const kingMove = (initialPosition: Position, desiredPosition: Position, t
             if(tileIsOccupied(passedPosition, boardState)) {
                 break
             }
+        }
+        if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 0) {
+            return true
+        } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0) {
+            return true
+        } if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7) {
+            return true
+        } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7) {
+            return true
         }
     }
     return false

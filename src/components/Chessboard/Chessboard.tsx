@@ -14,12 +14,12 @@ export default function Chessboard() {
     const referee = new Referee()
 
 function grabPiece(e: React.MouseEvent) {
-    const element = e.target as HTMLElement;
-    const chessboard = chessboardRef.current;
+    const element = e.target as HTMLElement
+    const chessboard = chessboardRef.current
     if(element.classList.contains("chess-piece") && chessboard) {
         const grabX = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE)
         const grabY = Math.abs(Math.ceil((e.clientY - chessboard.offsetTop - 800) / GRID_SIZE))
-        setGrapPosition({ x: grabX, y: grabY });
+        setGrapPosition({ x: grabX, y: grabY })
 
         const x = e.clientX - GRID_SIZE / 2
         const y = e.clientY - GRID_SIZE / 2
@@ -176,7 +176,7 @@ function promotionTeamType() {
     return (promotionPawn?.team === TeamType.OUR) ? "white" : "black"
 }
 
-    let board = [];
+    let board = []
 
     for (let j = VERTICAL_AXIS.length -1; j >= 0; j--) {
      for (let i = 0; i < HORIZONTAL_AXIS.length; i++) {
