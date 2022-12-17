@@ -1,5 +1,11 @@
 import { Position, Piece, TeamType, samePosition } from '../../Constants'
 
+const capture = require('../../../src/capture.wav')
+
+function playCaptureSound() {
+    new Audio(capture).play()
+}
+
 export const tileIsOccupied = (position: Position, boardState: Piece[]): boolean => {
     const piece = boardState.find(p => samePosition(p.position, position))
 
@@ -14,6 +20,7 @@ export const tileIsOccupiedByOpponent = (position: Position, boardState: Piece[]
     const piece = boardState.find(p => samePosition(p.position, position) && p.team !== team)
 
     if(piece) {
+        playCaptureSound()
         return true
     } else {
         return false

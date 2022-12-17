@@ -66,6 +66,12 @@ export default function Mainmenu (){
         setUsername("heipä jei")
     }
 
+    const sound = require('../boardStart.mp3')
+
+    function playNewGameSound() {
+        new Audio(sound).play()
+    }
+
     return(
       <div className="container">
         <div className='nav'>
@@ -90,8 +96,7 @@ export default function Mainmenu (){
         </div>
             <div className='boxes'>
                 <Link to="/game">
-            <button className='play'> New Game With Random</button>
-            
+            <button className='play' onClick={playNewGameSound}> New Game With Random</button>        
             </Link>
             <button onClick={() => navigate("/moves")} className='play'> New Game With Friend</button>
             </div>

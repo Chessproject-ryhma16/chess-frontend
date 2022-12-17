@@ -1,6 +1,6 @@
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
-import {useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
 import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition } from '../../Constants'
 
@@ -12,6 +12,11 @@ export default function Chessboard() {
     const chessboardRef = useRef<HTMLDivElement>(null)
     const modalRef = useRef<HTMLDivElement>(null)
     const referee = new Referee()
+    const impact = require('../../impact.wav')
+
+function playImpactSound() {
+        new Audio(impact).play()
+    }
 
 function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
@@ -97,7 +102,10 @@ function dropPiece(e: React.MouseEvent) {
                 },[] as Piece[])
 
                 setPieces(updatedPieces)
-            } else if (validMove) {
+            } else if (validMove) { 
+                
+                playImpactSound()
+
             const updatedPieces = pieces.reduce((results, piece) => {
                 if (samePosition(piece.position, grabPosition)) {
                     piece.enPassant = Math.abs(grabPosition.y - y) === 2 && piece.type === PieceType.PAWN

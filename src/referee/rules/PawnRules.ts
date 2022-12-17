@@ -5,7 +5,7 @@ export const pawnMove = (initialPosition: Position, desiredPosition: Position, t
     const specialRow = team === TeamType.OUR ? 1 : 6
     const pawnDirection = team === TeamType.OUR ? 1 : -1
 
-    if(initialPosition.x === desiredPosition.x && initialPosition.y === specialRow && desiredPosition.y - initialPosition.y === 2*pawnDirection) {
+    if(initialPosition.x === desiredPosition.x && initialPosition.y === specialRow && desiredPosition.y - initialPosition.y === 2 * pawnDirection) {
         if(!tileIsOccupied(desiredPosition, boardState) && !tileIsOccupied({x: desiredPosition.x, y: desiredPosition.y - pawnDirection}, boardState)) {
             return true
         }
