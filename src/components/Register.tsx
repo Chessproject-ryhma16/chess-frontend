@@ -1,4 +1,4 @@
-import './Register.css'
+import './RegisterAndLogin.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,7 +1,11 @@
-.home{
+.home {
+    width: 250px;
     display: flex;
     flex-direction: column;
-    size: 100px;
-    padding: 60px;
-    background-image: radial-gradient(circle, white, black)
+}
+
+.viesti {
+    font-family: 'Arial Rounded MT';
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

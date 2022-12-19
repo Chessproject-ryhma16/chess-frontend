@@ -1,15 +1,45 @@
-.container{
- display: grid;
- 
+.nav{
+    display: flex;
+    position: absolute;
+    justify-content: space-around;
+    align-items: center;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    padding-top: 20px;
 }
 
-.boxes{   
-    
-  
-    
+.Logo {
+  align-self: right;
+  width: 100px;
+  height: 100px;
+  padding-left: 25px;
+  padding-right: 65%;
+}
+
+.user{
+  font-family: 'Arial Rounded MT';
+  background-color: #5d3d5a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: large;
+  padding: 14px 20px;
+}
+
+.user:hover {
+  background-color: #5d3d5a8e;
+  cursor: pointer;
+}
+
+.username{
+    list-style-type: none;
+    font-size: large;
+    margin: 15px;
 }
 
 .play{
+  font-family: 'Arial Rounded MT';
   width: 100%;
   background-color: #5d3d5a;
   color: white;
@@ -19,35 +49,9 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: large;
-    
 }
-.nav{
-   
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 20px;
-    width: 50%;
-    padding: 50px 0;
-    right: 250px;
 
-}
-.user{
-
-  background-color: #5d3d5a;
-  color: white;
-  padding: 14px 20px;
-  margin: 30px;
-  border: none;
-  border-radius: 4px;
+.play:hover {
+  background-color: #5d3d5abd;
   cursor: pointer;
-  font-size: large;
-
-}
-
-.username{
-    list-style-type: none;
-    padding: 20px 20px;
-    margin: 20px;
-    font-size: large;
 }

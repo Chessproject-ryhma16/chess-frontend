@@ -7,6 +7,7 @@ import Mainmenu from './components/Mainmenu';
 import Register from './components/Register';
 import Sovellus from './Sovellus';
 
+
 function App() {
 
   
@@ -27,4 +28,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

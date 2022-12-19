@@ -140,5 +140,5 @@ export const initialBoardState: Piece[] = [
     },
     {
         image: `assets/images/blackPawn.png`, position: {x: 7, y: 6}, type: PieceType.PAWN, team: TeamType.OPPONENT,
-    },
-];
+    }
+]
