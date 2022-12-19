@@ -1,8 +1,8 @@
-import './Tile.css';
+import './Tile.css'
 
 interface Props {
-    image?: string;
-    number: number;
+    image?: string
+    number: number
 }
 
 export default function Tile({ number, image }: Props) {
@@ -13,7 +13,7 @@ export default function Tile({ number, image }: Props) {
 
             </div>}
         </div>
-        );
+        )
     } else {
         return (
         <div className="tile white-tile">

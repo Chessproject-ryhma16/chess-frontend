@@ -27,7 +27,7 @@ export default function Menu() {
         <input type="text" onChange={(e) => setMsg(e.target.value)} value={msg} required>
 
         </input>
-        <button onClick={handleClick} ref={ref}>
+        <button className="viesti" onClick={handleClick} ref={ref}>
             Lähetä viesti
         </button>
         <div>
