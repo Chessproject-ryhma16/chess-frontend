@@ -1,8 +1,9 @@
 import './Chessboard.css';
 import Tile from '../Tile/Tile';
-import {useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Referee from "../../referee/Referee";
-import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition } from '../../Constants'
+import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
+
 
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState<HTMLElement | null>(null);
@@ -10,6 +11,13 @@ export default function Chessboard() {
     const [pieces, setPieces] = useState<Piece[]>(initialBoardState);
     const chessboardRef = useRef<HTMLDivElement>(null);
     const referee = new Referee();
+    
+    socket.on("move", (data) => {
+        console.log("liike",data)
+        console.log("Vastaanottaa")
+        setPieces(data)  
+      }
+      )
 
 function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement;
@@ -72,11 +80,14 @@ function dropPiece(e: React.MouseEvent) {
 
         if(currentPiece){
             const validMove = referee.isValidMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
+            
+                
 
-            const isEnPassantMove = referee.isEnPassantMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
-
+            const isEnPassantMove = referee.isEnPassantMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces) 
+            
+        
             const pawnDirection = currentPiece.team === TeamType.OUR ? 1 : -1;
-
+            
             if(isEnPassantMove) {
                 const updatedPieces = pieces.reduce((results, piece) => {
                     if(samePosition(piece.position, grabPosition)) {
@@ -89,12 +100,18 @@ function dropPiece(e: React.MouseEvent) {
                             piece.enPassant = false;
                         }
                         results.push(piece)
+                        
                     }
-
+                    
                     return results
-                },[] as Piece[]);
-
+                }
+                ,[] as Piece[]
+                );
+                
                 setPieces(updatedPieces)
+                console.log(updatedPieces,'en passant')
+                socket.emit("move", updatedPieces)
+
             } else if (validMove) {
             //AAONBGPWOERGHBPOIWEUBGOIWEUBGIOUEWBG
             //AAONBGPWOERGHBPOIWEUBGOIWEUBGIOUEWBG
@@ -106,27 +123,41 @@ function dropPiece(e: React.MouseEvent) {
                     piece.position.x = x
                     piece.position.y = y
                     results.push(piece)
+                    console.log(piece, 'mikä tää on')
                 } else if(!(samePosition(piece.position, {x, y}))) {
                     if(piece.type === PieceType.PAWN) {
                         piece.enPassant = false;
                     }
+                    
                     results.push(piece)
+                    
                 }
-  
+            
                 return results
-            }, [] as Piece [])
-
+                
+            }
+            , [] as Piece []
+            )
+            
+            
             setPieces(updatedPieces)
-        } else {
+            console.log(updatedPieces,'updated pieces')
+            socket.emit("move", updatedPieces)
+            
+        }  else {
             //AWWPESOIUHGPUIJOQWAEHBGÅPOEWAIUGHB
             activePiece.style.position = 'relative';
             activePiece.style.removeProperty('Top');
             activePiece.style.removeProperty('Left');
         }
+
         }
         setActivePiece(null);
     }
+    
 }
+   
+    
 
     let board = [];
 
