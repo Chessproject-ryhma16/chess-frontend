@@ -43,10 +43,10 @@ export default function CreateGame() {
 
     return (
         <div className="containerCreate">
-          <div className="teksti">Anna huoneelle nimi</div>
+          <div className="teksti">Name your room</div>
               <input className="tekstikenttä" type="text" onChange={(e) => setRoomName(e.target.value)} value={roomName} required/>
                   {createdRoom ? true : <button className="nappi" onClick={handleClick} ref={ref}>
-                      Luo uusi pelihuone
+                      Create a new room
                   </button>}
                     <div className="message">
                       {currentMsg}

@@ -33,10 +33,10 @@ export default function JoinGame() {
 
     return (
          <div className="containerCreate">
-          <text className="teksti">Anna huoneen nimi</text>
+          <text className="teksti">Room name</text>
               <input className="tekstikenttä" type="text" onChange={(e) => setJoinRoom(e.target.value)} value={joinRoom} required/>
                   <button className="nappi" onClick={handleJoinClick} ref={ref}  >
-                      Liity pelihuoneeseen
+                      Join game
                   </button>
         </div>
     )
