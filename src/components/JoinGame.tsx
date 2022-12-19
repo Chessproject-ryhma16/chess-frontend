@@ -1,4 +1,4 @@
-import "./JoinGame.css"
+import "./CreateAndJoinGame.css"
 import { useRef, useState } from "react"
 import {socket} from '../Constants'
 import { useNavigate } from 'react-router-dom'
@@ -32,7 +32,7 @@ export default function JoinGame() {
 
 
     return (
-         <div className="containerJoin">
+         <div className="containerCreate">
           <text className="teksti">Anna huoneen nimi</text>
               <input className="tekstikenttä" type="text" onChange={(e) => setJoinRoom(e.target.value)} value={joinRoom} required/>
                   <button className="nappi" onClick={handleJoinClick} ref={ref}  >

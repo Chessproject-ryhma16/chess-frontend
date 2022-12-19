@@ -1,4 +1,4 @@
-import "./CreateGame.css"
+import "./CreateAndJoinGame.css"
 import { useRef, useState } from "react"
 import {socket} from '../Constants'
 import { useNavigate } from 'react-router-dom'
@@ -41,7 +41,7 @@ export default function CreateGame() {
     }
   })
 
-    return (        
+    return (
         <div className="containerCreate">
           <div className="teksti">Anna huoneelle nimi</div>
               <input className="tekstikenttä" type="text" onChange={(e) => setRoomName(e.target.value)} value={roomName} required/>
