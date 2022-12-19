@@ -1,8 +1,7 @@
 import './Mainmenu.css';
-import {Link, Navigate} from "react-router-dom"
+import {Link} from "react-router-dom"
 import jwt_decode from "jwt-decode";
-import { stringify } from 'querystring';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Mainmenu (){
@@ -23,7 +22,6 @@ export default function Mainmenu (){
                     let username = jwt_decode(user)
                     console.log(user,"suoraan token")
                     console.log(username,"mainmenu stringify")
-                    //console.log(Object.keys(username))
                      let u = JSON.stringify(username)
                      const split = u.split('"')
                      console.log(split[3], "splitti")
@@ -95,10 +93,11 @@ export default function Mainmenu (){
             </Link>
         </div>
             <div className='boxes'>
-                <Link to="/game">
-            <button className='play' onClick={playNewGameSound}> New Game With Random</button>        
+                <Link to="/creategame">
+            <button className='play' onClick={playNewGameSound}>Create new game</button>        </Link>
+            <Link to ="/joingame">
+            <button className='play'>Join game</button>
             </Link>
-            <button onClick={() => navigate("/moves")} className='play'> New Game With Friend</button>
             </div>
             <div>
                 {}

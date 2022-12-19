@@ -1,8 +1,9 @@
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
-import { useRef, useState } from 'react'
+import {  useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
-import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition } from '../../Constants'
+import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
+
 
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
@@ -17,6 +18,13 @@ export default function Chessboard() {
 function playImpactSound() {
         new Audio(impact).play()
     }
+    
+    socket.on("move", (data) => {
+        console.log("liike",data)
+        console.log("Vastaanottaa")
+        setPieces(data)  
+      }
+      )
 
 function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
@@ -79,6 +87,8 @@ function dropPiece(e: React.MouseEvent) {
 
         if(currentPiece){
             const validMove = referee.isValidMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
+            
+                
 
             const isEnPassantMove = referee.isEnPassantMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
 
@@ -96,12 +106,16 @@ function dropPiece(e: React.MouseEvent) {
                             piece.enPassant = false
                         }
                         results.push(piece)
+                        
                     }
-
+                    
                     return results
                 },[] as Piece[])
 
                 setPieces(updatedPieces)
+                console.log(updatedPieces,'en passant')
+                socket.emit("move", updatedPieces)
+
             } else if (validMove) { 
                 
                 playImpactSound()
@@ -120,25 +134,37 @@ function dropPiece(e: React.MouseEvent) {
                         setPromotionPawn(piece)
                     }
                     results.push(piece)
+                    console.log(piece, 'mikä tää on')
                 } else if(!(samePosition(piece.position, {x, y}))) {
                     if(piece.type === PieceType.PAWN) {
                         piece.enPassant = false
                     }
+                    
                     results.push(piece)
+                    
                 }
-  
+            
                 return results
-            }, [] as Piece [])
-
+                
+            }
+            , [] as Piece []
+            )
+            
+            
             setPieces(updatedPieces)
-        } else {
+            console.log(updatedPieces,'updated pieces')
+            socket.emit("move", updatedPieces)
+            
+        }  else {
             activePiece.style.position = 'relative'
             activePiece.style.removeProperty('Top')
             activePiece.style.removeProperty('Left')
         }
+
         }
         setActivePiece(null)
     }
+    
 }
 
 function promotePawn(pieceType: PieceType) {
