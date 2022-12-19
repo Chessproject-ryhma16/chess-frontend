@@ -1,7 +1,20 @@
-.home{
-    display: flex;
-    flex-direction: column;
-    size: 100px;
-    padding: 60px;
-    background-image: radial-gradient(circle, white, black)
+.containerJoin {
+    display: grid;
+    align-items: center;
+    text-align: center;
+    width: 250px;
+    height: 100px;
+    font-family: 'Arial Rounded MT';
+}
+
+.teksti {
+    font-family: 'Arial Rounded MT';
+}
+
+.tekstikenttä {
+    font-family: 'Arial Rounded MT';
+}
+
+.nappi {
+    font-family: 'Arial Rounded MT';
 }

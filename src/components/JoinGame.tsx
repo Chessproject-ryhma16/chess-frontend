@@ -1,8 +1,10 @@
-import { useRef, useState } from "react";
+import "./JoinGame.css"
+import { useRef, useState } from "react"
 import {socket} from '../Constants'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 
+const boardStart = require('../boardStart.mp3')
 
 export default function JoinGame() {
 
@@ -12,6 +14,9 @@ export default function JoinGame() {
   let navigate = useNavigate()
 
   const handleJoinClick = () => {
+
+    new Audio(boardStart).play()
+
     socket.emit("join", joinRoom )
 
     socket.on("joined", (arg) => {
@@ -27,15 +32,12 @@ export default function JoinGame() {
 
 
     return (
-      <div>
-         <div>
-         <input type="text" onChange={(e) => setJoinRoom(e.target.value)} value={joinRoom} required/>
-
-        <button onClick={handleJoinClick} ref={ref}  >
-            Liity pelihuoneeseen
-        </button>
-         </div>
-
-      </div>
+         <div className="containerJoin">
+          <text className="teksti">Anna huoneen nimi</text>
+              <input className="tekstikenttä" type="text" onChange={(e) => setJoinRoom(e.target.value)} value={joinRoom} required/>
+                  <button className="nappi" onClick={handleJoinClick} ref={ref}  >
+                      Liity pelihuoneeseen
+                  </button>
+        </div>
     )
 }

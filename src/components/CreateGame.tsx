@@ -1,8 +1,9 @@
-import "./CreateGame.css";
-import { useRef, useState } from "react";
+import "./CreateGame.css"
+import { useRef, useState } from "react"
 import {socket} from '../Constants'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
+const boardStart = require('../boardStart.mp3')
 
 export default function CreateGame() {
 
@@ -14,6 +15,8 @@ export default function CreateGame() {
   let navigate = useNavigate()
 
   const handleClick = () =>{
+
+  new Audio(boardStart).play()
 
   socket.emit("join", roomName )
   
@@ -39,16 +42,15 @@ export default function CreateGame() {
   })
 
     return (        
-      <div>
-        <input type="text" onChange={(e) => setRoomName(e.target.value)} value={roomName} required/>
-
-         {createdRoom ? true : <button onClick={handleClick} ref={ref}>
-             Luo uusi pelihuone
-         </button>}
-         <div>
-          {currentMsg}
-         </div>
-      </div>
+        <div className="containerCreate">
+          <div className="teksti">Anna huoneelle nimi</div>
+              <input className="tekstikenttä" type="text" onChange={(e) => setRoomName(e.target.value)} value={roomName} required/>
+                  {createdRoom ? true : <button className="nappi" onClick={handleClick} ref={ref}>
+                      Luo uusi pelihuone
+                  </button>}
+                    <div className="message">
+                      {currentMsg}
+                    </div>
+        </div>
     )
-    
 }

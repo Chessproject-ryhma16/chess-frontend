@@ -1,11 +1,24 @@
-.home {
+.containerCreate {
+    display: grid;
+    align-items: center;
+    text-align: center;
     width: 250px;
-    display: flex;
-    flex-direction: column;
+    height: 100px;
+    font-family: 'Arial Rounded MT';
 }
 
-.viesti {
+.teksti {
     font-family: 'Arial Rounded MT';
-    margin-top: 5px;
-    margin-bottom: 5px;
+}
+
+.tekstikenttä {
+    font-family: 'Arial Rounded MT';
+}
+
+.nappi {
+    font-family: 'Arial Rounded MT';
+}
+
+.message {
+    font-family: 'Arial Rounded MT';
 }
