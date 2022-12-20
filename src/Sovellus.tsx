@@ -8,4 +8,4 @@ function Sovellus() {
   )
 }
 
-export default Sovellus;
+export default Sovellus

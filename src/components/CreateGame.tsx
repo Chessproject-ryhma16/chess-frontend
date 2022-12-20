@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom'
 const boardStart = require('../boardStart.mp3')
 
 function playBoardStartSound(volume: number) {
-  const audio = new Audio(boardStart);
-  audio.volume = volume;
-  audio.play();
+  const audio = new Audio(boardStart)
+  audio.volume = volume
+  audio.play()
 }
 
 export default function CreateGame() {

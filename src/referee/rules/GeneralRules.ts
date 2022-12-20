@@ -4,15 +4,15 @@ const capture = require('../../../src/capture.wav')
 const kingCapture = require('../../../src/kingCapture.wav')
 
 function playCaptureSound(volume: number) {
-    const audio = new Audio(capture);
-    audio.volume = volume;
-    audio.play();
+    const audio = new Audio(capture)
+    audio.volume = volume
+    audio.play()
   }
 
 function playKingCaptureSound(volume: number) {
-    const audio = new Audio(kingCapture);
-    audio.volume = volume;
-    audio.play();
+    const audio = new Audio(kingCapture)
+    audio.volume = volume
+    audio.play()
   }
 
 export const tileIsOccupied = (position: Position, boardState: Piece[]): boolean => {
@@ -41,7 +41,7 @@ export const tileIsOccupiedByOpponent = (position: Position, boardState: Piece[]
 
 export const tileIsEmptyOrOccupiedByOpponent = (position: Position, boardState: Piece[], team: TeamType) => {
     if (!tileIsOccupied(position, boardState) || tileIsOccupiedByOpponent(position, boardState, team)) {
-        return true;
+        return true
     }
 }
 
@@ -49,11 +49,11 @@ let currentTurn = TeamType.OUR;
 
 export const whoseTurn = (team: TeamType) => {
     if (team !== currentTurn) {
-        return false;
+        return false
     }
     currentTurn = team === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR;
     
-    return true;
+    return true
 }
 
 const moveRook = (initialPosition: Position, desiredPosition: Position, boardState: Piece[]): boolean => {

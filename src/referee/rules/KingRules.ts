@@ -19,17 +19,29 @@ export const kingMove = (initialPosition: Position, desiredPosition: Position, t
                 break
             }
         }
-        if(whoseTurn(team)) {
-        if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 0) {
-            return movePiece(initialPosition, desiredPosition, boardState)
-        } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0) {
-            return movePiece(initialPosition, desiredPosition, boardState)
-        } if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7) {
-            return movePiece(initialPosition, desiredPosition, boardState)
-        } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7) {
-            return movePiece(initialPosition, desiredPosition, boardState)
+        if (!tileIsEmptyOrOccupiedByOpponent(desiredPosition, boardState, team)) {
+            return false;
+        }
+        if (desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 0 && whoseTurn(team)) {
+            if (tileIsEmptyOrOccupiedByOpponent({ x: 5, y: 0 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 6, y: 0 }, boardState, team)) {
+                return movePiece(initialPosition, desiredPosition, boardState)
+            }
+        } 
+        if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0 && whoseTurn(team)) {
+            if (tileIsEmptyOrOccupiedByOpponent({ x: 3, y: 0 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 2, y: 0 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 1, y: 0 }, boardState, team)) {
+                return movePiece(initialPosition, desiredPosition, boardState)
+            }
+        } 
+        if (desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7 && whoseTurn(team)) {
+            if (tileIsEmptyOrOccupiedByOpponent({ x: 5, y: 7 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 6, y: 7 }, boardState, team)) {
+                return movePiece(initialPosition, desiredPosition, boardState)
+            }
+        } 
+        if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7 && whoseTurn(team)) {
+            if (tileIsEmptyOrOccupiedByOpponent({ x: 3, y: 7 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 2, y: 7 }, boardState, team) && tileIsEmptyOrOccupiedByOpponent({ x: 1, y: 7 }, boardState, team)) {
+                return movePiece(initialPosition, desiredPosition, boardState)
+            }
         }
     }
-}
     return false
 }
