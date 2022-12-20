@@ -3,13 +3,17 @@ import { Position, Piece, TeamType, samePosition, PieceType } from '../../Consta
 const capture = require('../../../src/capture.wav')
 const kingCapture = require('../../../src/kingCapture.wav')
 
-function playCaptureSound() {
-    new Audio(capture).play()
-}
+function playCaptureSound(volume: number) {
+    const audio = new Audio(capture);
+    audio.volume = volume;
+    audio.play();
+  }
 
-function playKingCaptureSound() {
-    new Audio(kingCapture).play()
-}
+function playKingCaptureSound(volume: number) {
+    const audio = new Audio(kingCapture);
+    audio.volume = volume;
+    audio.play();
+  }
 
 export const tileIsOccupied = (position: Position, boardState: Piece[]): boolean => {
     const piece = boardState.find(p => samePosition(p.position, position))
@@ -25,10 +29,10 @@ export const tileIsOccupiedByOpponent = (position: Position, boardState: Piece[]
     const piece = boardState.find(p => samePosition(p.position, position) && p.team !== team)
 
     if(piece && piece.type === PieceType.KING) {
-        playKingCaptureSound()
+        playKingCaptureSound(1)
         return true
     } else if(piece) {
-        playCaptureSound()
+        playCaptureSound(1)
         return true
     } else {
         return false

@@ -5,6 +5,12 @@ import { useNavigate } from 'react-router-dom'
 
 const boardStart = require('../boardStart.mp3')
 
+function playBoardStartSound(volume: number) {
+  const audio = new Audio(boardStart);
+  audio.volume = volume;
+  audio.play();
+}
+
 export default function CreateGame() {
 
   const ref = useRef(null!);
@@ -16,7 +22,7 @@ export default function CreateGame() {
 
   const handleClick = () =>{
 
-  new Audio(boardStart).play()
+    playBoardStartSound(1)
 
   socket.emit("join", roomName )
   

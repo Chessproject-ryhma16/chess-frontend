@@ -14,9 +14,11 @@ export default function Chessboard() {
     const referee = new Referee()
     const impact = require('../../impact.wav')
 
-function playImpactSound() {
-        new Audio(impact).play()
-    }
+    function playImpactSound(volume: number) {
+        const audio = new Audio(impact);
+        audio.volume = volume;
+        audio.play();
+      }
     
     socket.on("move", (data) => {
         console.log("liike",data)
@@ -117,7 +119,7 @@ function dropPiece(e: React.MouseEvent) {
 
             } else if (validMove) { 
                 
-                playImpactSound()
+                playImpactSound(1)
 
             const updatedPieces = pieces.reduce((results, piece) => {
                 if (samePosition(piece.position, grabPosition)) {

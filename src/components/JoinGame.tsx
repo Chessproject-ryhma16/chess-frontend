@@ -3,8 +3,13 @@ import { useRef, useState } from "react"
 import {socket} from '../Constants'
 import { useNavigate } from 'react-router-dom'
 
-
 const boardStart = require('../boardStart.mp3')
+
+function playBoardStartSound(volume: number) {
+  const audio = new Audio(boardStart);
+  audio.volume = volume;
+  audio.play();
+}
 
 export default function JoinGame() {
 
@@ -15,7 +20,7 @@ export default function JoinGame() {
 
   const handleJoinClick = () => {
 
-    new Audio(boardStart).play()
+    playBoardStartSound(1)
 
     socket.emit("join", joinRoom )
 
