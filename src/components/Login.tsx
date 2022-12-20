@@ -17,7 +17,6 @@ export default function Login(){
 
     async function handleLogin(event: { preventDefault: () => void; }) {
         event.preventDefault()
-        console.log('yritetty loginia', {name, password})
         const response = await fetch('http://localhost:4000/login', {
             method: 'POST',
             headers:{
@@ -29,10 +28,8 @@ export default function Login(){
             }),
         })
          const data = await response.json()
-         console.log(data)
          if(data.user) {
             navigate("/")
-            console.log(data.user)
             localStorage.setItem("user", (data.user))
             
          } else {
@@ -50,7 +47,7 @@ export default function Login(){
             <div>
                 Salasana
             </div>
-                <input className='input' type="text" id="pword" name="password" placeholder="Your password..."
+                <input className='input' type="password" id="pword" name="password" placeholder="Your password..."
                 onChange={(e) => setPwd(e.target.value)} value={password} required/>
             <div>
             
