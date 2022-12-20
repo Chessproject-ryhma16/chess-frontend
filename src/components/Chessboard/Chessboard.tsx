@@ -1,6 +1,6 @@
 import './Chessboard.css'
 import Tile from '../Tile/Tile'
-import {  useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
 import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
 
@@ -14,19 +14,105 @@ export default function Chessboard() {
     const modalRef = useRef<HTMLDivElement>(null)
     const referee = new Referee()
     const impact = require('../../impact.wav')
+    const [whatSide, setWhatSide] = useState()
+    const [userName, setUserName] = useState('')
+    const [enemyName, setEnemyName] = useState('')
+    const [playerTwo, setPlayerTwo] = useState('')
+    const [playerTwoEnemy, setPlayerTwoEnemy] = useState('')
 
 function playImpactSound() {
         new Audio(impact).play()
     }
+    socket.on("side", (side) =>{
+        setWhatSide(side) 
+    })
     
     socket.on("move", (data) => {
-        console.log("liike",data)
-        console.log("Vastaanottaa")
         setPieces(data)  
-      }
-      )
+      })
 
-function grabPiece(e: React.MouseEvent) {
+
+useEffect(() => {
+    const user = localStorage.getItem("username")
+    if(user !== null){
+        if(whatSide === 0 ){
+            setEnemyName(user)
+        }
+        else if(whatSide === 1){
+        setUserName(user)
+        }
+    }
+    },[whatSide])
+
+    if(userName === null) {
+        socket.on("username", (username) => {
+                setUserName(username)
+        })     
+    } else if(userName !== null){
+        socket.on("username", (username) => {
+                setEnemyName(username)
+    })
+}
+if(enemyName === null) {
+    socket.on("username2", (username) => {
+            setPlayerTwoEnemy(username)
+    })     
+} else if(enemyName !== null || userName === null){
+    socket.on("username2", (username) => {
+            setPlayerTwo(username)
+})
+}
+
+
+/* JÄI SHAKKIMATTI KESKEN
+function findKing(pieces: Piece[]){
+    let whiteKing: Position | null = null
+    let blackKing: Position | null = null
+    for (const piece of pieces){
+        if(piece.type === PieceType.KING){
+            if(piece.team === 1){
+                whiteKing = piece.position
+            } else {
+                blackKing = piece.position
+            }
+        }
+    }
+    return {whiteKing, blackKing}
+}
+
+function checkKingStatus() {
+    const kingStatus = findKing(pieces)
+
+    console.log(whatSide,"Own king side")
+    const opponentPiecesPosition = findEnemyPieces(pieces)
+    console.log(opponentPiecesPosition,"opponentPiecesPosition")
+    console.log(kingStatus,"kingstatus")
+   
+    for (const piece of opponentPiecesPosition){
+       let kingPosition: Position
+       if(piece.team === 1){
+        if (!kingStatus.whiteKing) return
+        kingPosition = kingStatus.whiteKing
+       } else {
+        if (!kingStatus.blackKing) return;
+        kingPosition = kingStatus.blackKing;
+      }
+      
+        console.log("King is in check!");
+        return;
+    
+}
+
+}
+
+function findEnemyPieces(pieces: Piece []){
+    return pieces
+    .filter((p) => p.team !== whatSide)
+    .map((p)=> ({position: p.position, type: p.type, team: p.team}))
+}
+*/
+
+  function grabPiece(e: React.MouseEvent) {
     const element = e.target as HTMLElement
     const chessboard = chessboardRef.current
     if(element.classList.contains("chess-piece") && chessboard) {
@@ -94,7 +180,7 @@ function dropPiece(e: React.MouseEvent) {
 
             const pawnDirection = currentPiece.team === TeamType.OUR ? 1 : -1
 
-            if(isEnPassantMove) {
+            if(isEnPassantMove && currentPiece.team === whatSide) {
                 const updatedPieces = pieces.reduce((results, piece) => {
                     if(samePosition(piece.position, grabPosition)) {
                         piece.enPassant = false
@@ -111,12 +197,11 @@ function dropPiece(e: React.MouseEvent) {
                     
                     return results
                 },[] as Piece[])
-
+                
                 setPieces(updatedPieces)
-                console.log(updatedPieces,'en passant')
                 socket.emit("move", updatedPieces)
 
-            } else if (validMove) { 
+            } else if (validMove && currentPiece.team === whatSide) { 
                 
                 playImpactSound()
 
@@ -134,7 +219,6 @@ function dropPiece(e: React.MouseEvent) {
                         setPromotionPawn(piece)
                     }
                     results.push(piece)
-                    console.log(piece, 'mikä tää on')
                 } else if(!(samePosition(piece.position, {x, y}))) {
                     if(piece.type === PieceType.PAWN) {
                         piece.enPassant = false
@@ -149,8 +233,6 @@ function dropPiece(e: React.MouseEvent) {
             }
             , [] as Piece []
             )
-            
-            
             setPieces(updatedPieces)
             console.log(updatedPieces,'updated pieces')
             socket.emit("move", updatedPieces)
@@ -232,6 +314,10 @@ function promotionTeamType() {
             <img onClick={() => promotePawn(PieceType.BISHOP)} src={`/assets/images/${promotionTeamType()}Bishop.png`}/>
             </div>
         </div>
+        <div>
+            {enemyName ? enemyName : playerTwoEnemy}
+        </div >
+        
             <div 
             onMouseMove={(e) => movePiece(e)} 
             onMouseDown={e => grabPiece(e)}
@@ -240,6 +326,9 @@ function promotionTeamType() {
             ref={chessboardRef}
             >
                 {board}
+            </div>
+            <div>
+                {userName ? userName : playerTwo}
             </div>
         </>
     )

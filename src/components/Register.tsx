@@ -20,9 +20,8 @@ export default function Register(){
             setTimeout(()=> {
                 navigate("/");
                }, 4000);
-           console.log("timer aloitettu")
         }   else {
-            console.log("falseeeee")
+            
         }
       }, [trigger]);
 
@@ -47,7 +46,6 @@ export default function Register(){
             setTrigger(true)
             setMsg("Rekisteröinti onnistui voit nyt kirjautua sisään")
          } else {
-            console.log('Tapahtui virhe')
             setMsg("Käyttäjänimi on varattu")
          }
     }

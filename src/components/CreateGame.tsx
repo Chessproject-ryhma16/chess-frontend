@@ -1,5 +1,5 @@
 import "./CreateGame.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {socket} from '../Constants'
 import { useNavigate } from 'react-router-dom';
 
@@ -10,11 +10,19 @@ export default function CreateGame() {
   const [roomName, setRoomName] = useState('')
   const [currentMsg, setCurrentMsg] = useState('')
   const [createdRoom, setCreatedRoom] = useState(false)
+  const [userName, setUserName] = useState('')
 
   let navigate = useNavigate()
 
-  const handleClick = () =>{
+  useEffect(() => {
+    const user = localStorage.getItem("username")
+    if(user !== null){
+        setUserName(user)
+    }
+    },[userName])
 
+  const handleClick = () =>{
+  
   socket.emit("join", roomName )
   
   socket.on("created", (arg) => {
@@ -24,17 +32,16 @@ export default function CreateGame() {
       setCurrentMsg(arg)
       setCreatedRoom(true)
     } else {
-      console.log("error try again")
+    
     }
   })
   }
   socket.on("joined", (arg)=> {
-    console.log(arg, 'create gamen puolella')
     if(arg === "joined room"){
-      console.log("Opponent joined room successfully")
+      socket.emit("username2", userName)
       navigate('/game')
     } else {
-      console.log("Room is full")
+      
     }
   })
 

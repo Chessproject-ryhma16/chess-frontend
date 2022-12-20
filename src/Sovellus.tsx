@@ -1,9 +1,10 @@
 import Chessboard from './components/Chessboard/Chessboard'
 
 function Sovellus() {
+
   return (
-    <div>
-      <Chessboard/>
+    <div> 
+      <Chessboard/> 
     </div>
   )
 }
