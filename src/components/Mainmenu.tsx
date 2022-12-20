@@ -52,16 +52,11 @@ export default function Mainmenu (){
         setUsername("Guest")
     }
 
-    const sound = require('../boardStart.mp3')
-
-    function playNewGameSound() {
-        new Audio(sound).play()
-    }
-
     return(
       <div className="container">
         <div className='nav'>
             <img className="Logo" src="assets/images/16.png"/>
+
             <div className="username">
             {username}
             </div>
@@ -78,16 +73,18 @@ export default function Mainmenu (){
                 <button className="user">Register</button>
             </Link>
         </div>
+
             <div className='boxes'>
                 <Link to="/creategame">
-            <button className='play' onClick={playNewGameSound}>Create new game</button>        </Link>
-            <Link to ="/joingame">
-            <button className='play'>Join game</button>
-            </Link>
+                    <button className='play'>Create new game</button>        
+                </Link>
+                <Link to ="/joingame">
+                    <button className='play'>Join game</button>
+                </Link>
             </div>
             <div>
                 {}
             </div>
       </div>
-    );
+    )
 }

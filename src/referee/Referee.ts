@@ -1,11 +1,14 @@
 import { PieceType, TeamType, Piece, Position } from "../Constants"
 import { pawnMove, knightMove, bishopMove, rookMove, queenMove, kingMove} from "./rules"
+import { whoseTurn } from "./rules/GeneralRules"
 
 const capture = require('../../src/capture.wav')
 
-function playCaptureSound() {
-    new Audio(capture).play()
-}
+function playCaptureSound(volume: number) {
+    const audio = new Audio(capture)
+    audio.volume = volume
+    audio.play()
+  }
 
 export default class Reference {
     isEnPassantMove(initialPosition: Position, desiredPosition: Position, type: PieceType, team: TeamType, boardState: Piece[]) {
@@ -17,7 +20,8 @@ export default class Reference {
                     (p) => p.position.x === desiredPosition.x && p.position.y === desiredPosition.y - pawnDirection && p.enPassant
                 )
                 if(piece) {
-                    playCaptureSound()
+                    whoseTurn(team)
+                    playCaptureSound(1)
                     return true
                 }
             }

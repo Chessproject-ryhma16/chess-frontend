@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
 import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
 
-
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
     const [promotionPawn, setPromotionPawn] = useState<Piece>()
@@ -20,12 +19,18 @@ export default function Chessboard() {
     const [playerTwo, setPlayerTwo] = useState('')
     const [playerTwoEnemy, setPlayerTwoEnemy] = useState('')
 
-function playImpactSound() {
-        new Audio(impact).play()
-    }
+
+
     socket.on("side", (side) =>{
         setWhatSide(side) 
     })
+
+    function playImpactSound(volume: number) {
+        const audio = new Audio(impact);
+        audio.volume = volume;
+        audio.play();
+      }
+
     
     socket.on("move", (data) => {
         setPieces(data)  
@@ -203,7 +208,7 @@ function dropPiece(e: React.MouseEvent) {
 
             } else if (validMove && currentPiece.team === whatSide) { 
                 
-                playImpactSound()
+                playImpactSound(1)
 
             const updatedPieces = pieces.reduce((results, piece) => {
                 if (samePosition(piece.position, grabPosition)) {

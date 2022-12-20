@@ -17,6 +17,20 @@
   padding-right: 65%;
 }
 
+.Logo:hover {
+  cursor: pointer;
+}
+
+.username{
+  list-style-type: none;
+  font-size: large;
+  margin: 15px;
+}
+
+.username:hover {
+  color: rgb(100, 25, 170);
+}
+
 .user{
   font-family: 'Arial Rounded MT';
   background-color: #5d3d5a;
@@ -28,14 +42,9 @@
 }
 
 .user:hover {
-  background-color: #5d3d5a8e;
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,1);
+  background-color: #282828;
   cursor: pointer;
-}
-
-.username{
-    list-style-type: none;
-    font-size: large;
-    margin: 15px;
 }
 
 .play{
@@ -52,6 +61,7 @@
 }
 
 .play:hover {
-  background-color: #5d3d5abd;
+  box-shadow: 4px 8px 19px -3px rgba(0,0,0,1);
+  background-color: #282828;
   cursor: pointer;
 }

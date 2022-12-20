@@ -1,7 +1,0 @@
-.home{
-    display: flex;
-    flex-direction: column;
-    size: 100px;
-    padding: 60px;
-    background-image: radial-gradient(circle, white, black)
-}

@@ -1,0 +1,76 @@
+.containerCreate {
+    margin-bottom: 20px;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    width: 250px;
+    height: 115px;
+    font-family: 'Arial Rounded MT';
+}
+
+.teksti {
+    margin-bottom: 10px;
+    font-family: 'Arial Rounded MT';
+}
+
+.tekstikenttä {
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 4px;
+    height: 30px;
+    font-family: 'Arial Rounded MT';
+}
+
+input.tekstikenttä:focus {
+    outline-width: 0;
+}
+
+.nappi {
+    margin-top: 10px;
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: white;
+    z-index: 1;
+    background: #5d3d5a;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: 200ms;
+    overflow: hidden;
+}
+   
+.nappi::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: 200ms
+}
+   
+.nappi:hover {
+    cursor: pointer;
+    color: white;
+}
+   
+.nappi:hover::before {
+    width: 100%;
+}
+
+.nappi:focus {
+    outline:0;
+}
+
+.message {
+    font-family: 'Arial Rounded MT';
+}
