@@ -38,3 +38,43 @@ export const tileIsOccupiedByOpponent = (position: Position, boardState: Piece[]
 export const tileIsEmptyOrOccupiedByOpponent = (position: Position, boardState: Piece[], team: TeamType) => {
     return !tileIsOccupied(position, boardState) || tileIsOccupiedByOpponent(position, boardState, team)
 }
+
+const moveRook = (initialPosition: Position, desiredPosition: Position, boardState: Piece[]): boolean => {
+    let rook: Piece | undefined = boardState.find(piece => piece.position.x === initialPosition.x && piece.position.y === initialPosition.y)
+    if (!rook) {
+      return false
+    }
+    rook.position = desiredPosition
+    return true
+  }
+
+export const movePiece = (initialPosition: Position, desiredPosition: Position, boardState: Piece[]): boolean => {
+    if (desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 0) {
+      let rookPosition: Position = {x: 7, y: 0}
+      let rookDestination: Position = {x: 5, y: 0}
+      return moveRook(rookPosition, rookDestination, boardState)
+    } 
+    if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0) {
+      let rookPosition: Position = {x: 0, y: 0}
+      let rookDestination: Position = {x: 3, y: 0}
+      return moveRook(rookPosition, rookDestination, boardState)
+    } 
+    if (desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7) {
+      let rookPosition: Position = {x: 7, y: 7}
+      let rookDestination: Position = {x: 5, y: 7}
+      return moveRook(rookPosition, rookDestination, boardState)
+    } 
+    if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7) {
+      let rookPosition: Position = {x: 0, y: 7}
+      let rookDestination: Position = {x: 3, y: 7}
+      return moveRook(rookPosition, rookDestination, boardState)
+    }
+    let piece: Piece | undefined = boardState.find(piece =>
+      piece.position.x === initialPosition.x && piece.position.y === initialPosition.y
+    )
+    if (!piece) {
+      return false
+    }
+    piece.position = desiredPosition
+    return true
+  }

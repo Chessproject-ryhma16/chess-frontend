@@ -1,5 +1,5 @@
-import { Piece, Position, samePosition, TeamType } from "../../Constants"
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from "./GeneralRules"
+import { Piece, PieceType, Position, samePosition, TeamType } from "../../Constants"
+import { movePiece, tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from "./GeneralRules"
 
 export const kingMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
     for(let i = 1; i < 2; i++) {
@@ -18,13 +18,13 @@ export const kingMove = (initialPosition: Position, desiredPosition: Position, t
             }
         }
         if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 0) {
-            return true
+            return movePiece(initialPosition, desiredPosition, boardState)
         } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0) {
-            return true
+            return movePiece(initialPosition, desiredPosition, boardState)
         } if(desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7) {
-            return true
+            return movePiece(initialPosition, desiredPosition, boardState)
         } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7) {
-            return true
+            return movePiece(initialPosition, desiredPosition, boardState)
         }
     }
     return false

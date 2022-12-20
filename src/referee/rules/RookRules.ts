@@ -25,18 +25,6 @@ export const rookMove = (initialPosition: Position, desiredPosition: Position, t
             let multiplier = (desiredPosition.x < initialPosition.x) ? -1 : 1
 
             let passedPosition: Position = { x: initialPosition.x + (i * multiplier), y: initialPosition.y}
-
-            if(tileIsEmptyOrOccupiedByOpponent(desiredPosition, boardState, team)) {
-                if(desiredPosition.x - initialPosition.x === 3 && initialPosition.x === 0 && initialPosition.y === 0) {
-                    return true
-                } if(desiredPosition.x - initialPosition.x === 3 && initialPosition.x === 0 && initialPosition.y === 7) {
-                    return true
-                } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 7 && initialPosition.y === 0) {
-                    return true
-                } if(desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 7 && initialPosition.y === 7) {
-                    return true
-                }
-            }
             
             if(samePosition(passedPosition, desiredPosition)) {
                 if(tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {

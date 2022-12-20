@@ -4,7 +4,6 @@ import {  useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
 import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
 
-
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
     const [promotionPawn, setPromotionPawn] = useState<Piece>()
