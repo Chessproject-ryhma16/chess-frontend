@@ -1,5 +1,5 @@
 import { TeamType, Piece, Position } from "../../Constants"
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied, tileIsOccupiedByOpponent, whoseTurn } from "./GeneralRules"
+import { tileIsOccupied, tileIsOccupiedByOpponent, whoseTurn } from "./GeneralRules"
 
 export const pawnMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
     const specialRow = team === TeamType.OUR ? 1 : 6
@@ -19,13 +19,15 @@ export const pawnMove = (initialPosition: Position, desiredPosition: Position, t
     }
     } else if(desiredPosition.x - initialPosition.x === -1 && desiredPosition.y - initialPosition.y === pawnDirection) {
         if(tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
-            whoseTurn(team)
+            if(whoseTurn(team)) {
             return true
         }
+    }
     } else if(desiredPosition.x - initialPosition.x === 1 && desiredPosition.y - initialPosition.y === pawnDirection) {
         if(tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
-            whoseTurn(team)
+            if(whoseTurn(team)) {
             return true
         }
+    }
     } return false
 }

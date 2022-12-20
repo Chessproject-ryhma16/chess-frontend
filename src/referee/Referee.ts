@@ -4,9 +4,11 @@ import { whoseTurn } from "./rules/GeneralRules"
 
 const capture = require('../../src/capture.wav')
 
-function playCaptureSound() {
-    new Audio(capture).play()
-}
+function playCaptureSound(volume: number) {
+    const audio = new Audio(capture)
+    audio.volume = volume
+    audio.play()
+  }
 
 export default class Reference {
     isEnPassantMove(initialPosition: Position, desiredPosition: Position, type: PieceType, team: TeamType, boardState: Piece[]) {
@@ -19,7 +21,7 @@ export default class Reference {
                 )
                 if(piece) {
                     whoseTurn(team)
-                    playCaptureSound()
+                    playCaptureSound(1)
                     return true
                 }
             }
