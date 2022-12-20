@@ -40,15 +40,30 @@ export const tileIsOccupiedByOpponent = (position: Position, boardState: Piece[]
 }
 
 export const tileIsEmptyOrOccupiedByOpponent = (position: Position, boardState: Piece[], team: TeamType) => {
-    return !tileIsOccupied(position, boardState) || tileIsOccupiedByOpponent(position, boardState, team)
+    if (!tileIsOccupied(position, boardState) || tileIsOccupiedByOpponent(position, boardState, team)) {
+        return true;
+    }
+}
+
+let currentTurn = TeamType.OUR;
+
+export const whoseTurn = (team: TeamType) => {
+    if (team !== currentTurn) {
+        return false;
+    }
+    currentTurn = team === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR;
+    
+    return true;
 }
 
 const moveRook = (initialPosition: Position, desiredPosition: Position, boardState: Piece[]): boolean => {
-    let rook: Piece | undefined = boardState.find(piece => piece.position.x === initialPosition.x && piece.position.y === initialPosition.y)
-    if (!rook) {
+    let piece: Piece | undefined = boardState.find(piece => 
+      piece.position.x === initialPosition.x && piece.position.y === initialPosition.y
+    )
+    if (!piece || piece.type !== PieceType.ROOK) {
       return false
     }
-    rook.position = desiredPosition
+    piece.position = desiredPosition
     return true
   }
 
@@ -57,17 +72,17 @@ export const movePiece = (initialPosition: Position, desiredPosition: Position, 
       let rookPosition: Position = {x: 7, y: 0}
       let rookDestination: Position = {x: 5, y: 0}
       return moveRook(rookPosition, rookDestination, boardState)
-    } 
+    }
     if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 0) {
       let rookPosition: Position = {x: 0, y: 0}
       let rookDestination: Position = {x: 3, y: 0}
       return moveRook(rookPosition, rookDestination, boardState)
-    } 
+    }
     if (desiredPosition.x - initialPosition.x === 2 && initialPosition.x === 4 && initialPosition.y === 7) {
       let rookPosition: Position = {x: 7, y: 7}
       let rookDestination: Position = {x: 5, y: 7}
       return moveRook(rookPosition, rookDestination, boardState)
-    } 
+    }
     if (desiredPosition.x - initialPosition.x === -2 && initialPosition.x === 4 && initialPosition.y === 7) {
       let rookPosition: Position = {x: 0, y: 7}
       let rookDestination: Position = {x: 3, y: 7}
