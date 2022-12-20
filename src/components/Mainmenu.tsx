@@ -68,34 +68,34 @@ export default function Mainmenu (){
       <div className="container">
         <div className='nav'>
             <img className="Logo" src="assets/images/16.png"/>
-            <Link to ="/user-info">
-            <li className="username" >{username2}</li>
-            </Link>
-            <div>{isUserLoggedIn() === true ? (<>
+                <Link to ="/user-info">
+                    <li className="username" >{username2}</li>
+                </Link>
+            <div>{isUserLoggedIn() === true ? 
+            (<>
                 <button className="user" onClick={logout}>Log out</button>
             </>):
-             (<>
-             <Link to ="/login">
-            <button className="user">Log in</button>
-            </Link>
-             </>)
-             }</div>
-            
-           
-            <Link to ="/register">
-                <button className="user">Register</button>
-            </Link>
-        </div>
+            (<>
+                <Link to ="/login">
+                    <button className="user">Log in</button>
+                </Link>
+            </>)
+            }</div>
+                <Link to ="/register">
+                    <button className="user">Register</button>
+                </Link>
+            </div>
             <div className='boxes'>
                 <Link to="/creategame">
-            <button className='play'>Create new game</button>        </Link>
-            <Link to ="/joingame">
-            <button className='play'>Join game</button>
-            </Link>
+                    <button className='play'>Create new game</button>        
+                </Link>
+                <Link to ="/joingame">
+                    <button className='play'>Join game</button>
+                </Link>
             </div>
             <div>
                 {}
             </div>
       </div>
-    );
+    )
 }
