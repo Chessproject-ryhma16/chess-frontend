@@ -8,6 +8,7 @@ export const pawnMove = (initialPosition: Position, desiredPosition: Position, t
     if(initialPosition.x === desiredPosition.x && initialPosition.y === specialRow && desiredPosition.y - initialPosition.y === 2 * pawnDirection) {
         if(whoseTurn(team)){
         if(!tileIsOccupied(desiredPosition, boardState) && !tileIsOccupied({x: desiredPosition.x, y: desiredPosition.y - pawnDirection}, boardState)) {
+            whoseTurn(team)
             return true
         }
     }
@@ -19,17 +20,14 @@ export const pawnMove = (initialPosition: Position, desiredPosition: Position, t
     }
 }
     else if(desiredPosition.x - initialPosition.x === -1 && desiredPosition.y - initialPosition.y === pawnDirection) {
-        if(whoseTurn(team)){
         if(tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
+            whoseTurn(team)
             return true
         }
-    }
- } else if(desiredPosition.x - initialPosition.x === 1 && desiredPosition.y - initialPosition.y === pawnDirection) {
-    if(whoseTurn(team)){
+    } else if(desiredPosition.x - initialPosition.x === 1 && desiredPosition.y - initialPosition.y === pawnDirection) {
         if(tileIsOccupiedByOpponent(desiredPosition, boardState, team)) {
+            whoseTurn(team)
             return true
         }
-    }
-}
-    return false
+    } return false
 }
