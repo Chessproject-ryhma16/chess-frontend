@@ -1,6 +1,6 @@
 import { PieceType, TeamType, Piece, Position } from "../Constants"
 import { pawnMove, knightMove, bishopMove, rookMove, queenMove, kingMove} from "./rules"
-import { whoseTurn } from "./rules/GeneralRules"
+
 
 const capture = require('../../src/capture.wav')
 
@@ -20,7 +20,7 @@ export default class Reference {
                     (p) => p.position.x === desiredPosition.x && p.position.y === desiredPosition.y - pawnDirection && p.enPassant
                 )
                 if(piece) {
-                    whoseTurn(team)
+                    
                     playCaptureSound(1)
                     return true
                 }

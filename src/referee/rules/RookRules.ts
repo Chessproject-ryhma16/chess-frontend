@@ -1,5 +1,5 @@
 import { Piece, Position, samePosition, TeamType } from "../../Constants"
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied, whoseTurn } from "./GeneralRules"
+import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied  } from "./GeneralRules"
 
 
 export const rookMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
@@ -9,10 +9,10 @@ export const rookMove = (initialPosition: Position, desiredPosition: Position, t
 
             let passedPosition: Position = {x: initialPosition.x, y: initialPosition.y + (i * multiplier)}
             if(samePosition(passedPosition, desiredPosition)) {
-                if(whoseTurn(team)){
+                
                 if(tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
                     return true
-                }
+                
             }
          } else {
                 if(tileIsOccupied(passedPosition, boardState)) {
@@ -29,10 +29,10 @@ export const rookMove = (initialPosition: Position, desiredPosition: Position, t
             let passedPosition: Position = { x: initialPosition.x + (i * multiplier), y: initialPosition.y}
             
             if(samePosition(passedPosition, desiredPosition)) {
-                if(whoseTurn(team)){
+                
                 if(tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
                     return true
-                }
+                
             }
          } else {
                 if(tileIsOccupied(passedPosition, boardState)) {
