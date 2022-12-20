@@ -1,5 +1,5 @@
 import { Piece, Position, samePosition, TeamType } from "../../Constants"
-import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied, whoseTurn } from "./GeneralRules"
+import { tileIsEmptyOrOccupiedByOpponent, tileIsOccupied } from "./GeneralRules"
 
 
 export const queenMove = (initialPosition: Position, desiredPosition: Position, team: TeamType, boardState: Piece[]): boolean => {
@@ -10,10 +10,10 @@ export const queenMove = (initialPosition: Position, desiredPosition: Position, 
             let passedPosition: Position = {x: initialPosition.x + (i * multiplierX), y: initialPosition.y + (i * multiplierY)}
 
             if(samePosition(passedPosition, desiredPosition)) {
-                if(whoseTurn(team)){
+               
                 if(tileIsEmptyOrOccupiedByOpponent(passedPosition, boardState, team)) {
                     return true
-                }
+                
             }
          } else {
                 if(tileIsOccupied(passedPosition, boardState)) {

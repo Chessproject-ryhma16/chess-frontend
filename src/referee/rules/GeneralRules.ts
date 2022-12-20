@@ -15,6 +15,18 @@ function playKingCaptureSound(volume: number) {
     audio.play()
   }
 
+//   let currentTurn = TeamType.OUR;
+
+//  export const whoseTurn = (team: TeamType) => {
+//     if (team !== currentTurn) {
+//         return false
+//     }
+//     currentTurn = team === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR;
+    
+//     return true
+// }
+
+
 export const tileIsOccupied = (position: Position, boardState: Piece[]): boolean => {
     const piece = boardState.find(p => samePosition(p.position, position))
 
@@ -43,17 +55,6 @@ export const tileIsEmptyOrOccupiedByOpponent = (position: Position, boardState: 
     if (!tileIsOccupied(position, boardState) || tileIsOccupiedByOpponent(position, boardState, team)) {
         return true
     }
-}
-
-let currentTurn = TeamType.OUR;
-
-export const whoseTurn = (team: TeamType) => {
-    if (team !== currentTurn) {
-        return false
-    }
-    currentTurn = team === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR;
-    
-    return true
 }
 
 const moveRook = (initialPosition: Position, desiredPosition: Position, boardState: Piece[]): boolean => {

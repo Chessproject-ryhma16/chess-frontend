@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Referee from "../../referee/Referee"
 import { VERTICAL_AXIS, HORIZONTAL_AXIS, GRID_SIZE, Piece, PieceType, TeamType, initialBoardState, Position, samePosition, socket } from '../../Constants'
 
+
 export default function Chessboard() {
     const [activePiece, setActivePiece] = useState<HTMLElement | null>(null)
     const [promotionPawn, setPromotionPawn] = useState<Piece>()
@@ -18,12 +19,34 @@ export default function Chessboard() {
     const [enemyName, setEnemyName] = useState('')
     const [playerTwo, setPlayerTwo] = useState('')
     const [playerTwoEnemy, setPlayerTwoEnemy] = useState('')
+    const [currentTeam, setCurrentTeam] = useState<TeamType | undefined>(undefined);
 
+// useEffect(() => {
+//   if (whatSide === 1) {
+//     setCurrentTeam(TeamType.OUR);
+//   } else if (whatSide === 0) {
+//     setCurrentTeam(TeamType.OPPONENT);
+//   }
+// }, [whatSide]);
 
 
     socket.on("side", (side) =>{
         setWhatSide(side) 
     })
+//     const setTeamType = (team: TeamType) => {
+//         let currentTurn
+//         if(whatSide === 1){
+//             currentTurn = TeamType.OUR
+//         } else if(whatSide === 0){
+//             currentTurn = TeamType.OPPONENT
+//         }
+//         if(team!== currentTurn){
+//             return false
+//         }
+//         currentTurn= team === TeamType.OUR ? TeamType.OPPONENT : TeamType.OUR;
+
+//         return true
+//     }
 
     function playImpactSound(volume: number) {
         const audio = new Audio(impact);
@@ -169,6 +192,7 @@ function movePiece(e: React.MouseEvent) {
 }
 
 function dropPiece(e: React.MouseEvent) {
+  
     const chessboard = chessboardRef.current
     if(activePiece && chessboard) {
         const x = Math.floor((e.clientX - chessboard.offsetLeft) / GRID_SIZE)
@@ -178,13 +202,11 @@ function dropPiece(e: React.MouseEvent) {
 
         if(currentPiece){
             const validMove = referee.isValidMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
-            
-                
-
+                    
             const isEnPassantMove = referee.isEnPassantMove(grabPosition, {x, y}, currentPiece.type, currentPiece.team, pieces)
 
             const pawnDirection = currentPiece.team === TeamType.OUR ? 1 : -1
-
+            
             if(isEnPassantMove && currentPiece.team === whatSide) {
                 const updatedPieces = pieces.reduce((results, piece) => {
                     if(samePosition(piece.position, grabPosition)) {
@@ -287,8 +309,8 @@ function promotePawn(pieceType: PieceType) {
         results.push(piece)
         return results
     }, [] as Piece[])
-
     setPieces(updatedPieces)
+    socket.emit("move", updatedPieces)
 
     modalRef.current?.classList.add("hidden")
 }
@@ -319,7 +341,7 @@ function promotionTeamType() {
             <img onClick={() => promotePawn(PieceType.BISHOP)} src={`/assets/images/${promotionTeamType()}Bishop.png`}/>
             </div>
         </div>
-        <div>
+        <div className='nimi1'>
             {enemyName ? enemyName : playerTwoEnemy}
         </div >
         
@@ -332,7 +354,7 @@ function promotionTeamType() {
             >
                 {board}
             </div>
-            <div>
+            <div className='nimi2'>
                 {userName ? userName : playerTwo}
             </div>
         </>
